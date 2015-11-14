@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 5/11/2015 05:15:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.pojo.Producto" table="producto" catalog="logocare" optimistic-lock="version">
+        <id name="idProducto" type="java.lang.Integer">
+            <column name="idProducto" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="categoria" class="model.pojo.Categoria" fetch="select">
+            <column name="idCategoria" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="45" />
+        </property>
+        <property name="precio" type="java.lang.Double">
+            <column name="Precio" precision="22" scale="0" />
+        </property>
+        <property name="stock" type="java.lang.Integer">
+            <column name="Stock" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="Descripcion" length="45" />
+        </property>
+        <property name="foto" type="string">
+            <column name="Foto" length="45" />
+        </property>
+        <set name="listadeseos" table="listadeseo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idProducto" not-null="true" />
+            </key>
+            <one-to-many class="model.pojo.Listadeseo" />
+        </set>
+        <set name="detallepedidos" table="detallepedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idProducto" not-null="true" />
+            </key>
+            <one-to-many class="model.pojo.Detallepedido" />
+        </set>
+    </class>
+</hibernate-mapping>

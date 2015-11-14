@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 5/11/2015 05:15:37 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.pojo.Cliente" table="cliente" catalog="logocare" optimistic-lock="version">
+        <id name="idCliente" type="int">
+            <column name="idCliente" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="Nombre" length="45" />
+        </property>
+        <property name="apePat" type="string">
+            <column name="ApePat" length="45" />
+        </property>
+        <property name="apeMat" type="string">
+            <column name="ApeMat" length="45" />
+        </property>
+        <property name="correo" type="string">
+            <column name="Correo" length="90" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="Sexo" length="1" />
+        </property>
+        <property name="contrasena" type="string">
+            <column name="Contrasena" length="45" />
+        </property>
+        <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCliente" not-null="true" />
+            </key>
+            <one-to-many class="model.pojo.Pedido" />
+        </set>
+        <set name="listadeseos" table="listadeseo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCliente" not-null="true" />
+            </key>
+            <one-to-many class="model.pojo.Listadeseo" />
+        </set>
+    </class>
+</hibernate-mapping>
